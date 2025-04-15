@@ -2,18 +2,21 @@ import 'package:african_countries/domain/models/country.dart';
 import 'package:flutter/material.dart';
 
 class CountryTile extends StatelessWidget {
-  const CountryTile(this.countryData, {required this.onPressed, required this.index, super.key});
+  const CountryTile(
+    this.countryData, {
+    required this.onPressed,
+    required this.index,
+    super.key,
+  });
   final Country countryData;
   final int index;
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 20.0),
-      padding: EdgeInsets.all(2.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-        color: Colors.grey[200],
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
       ),
       child: ListTile(
         leading: SizedBox(
@@ -47,7 +50,6 @@ class CountryTile extends StatelessWidget {
           ),
         ),
         onTap: onPressed,
-        
       ),
     );
   }
