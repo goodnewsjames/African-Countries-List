@@ -18,39 +18,38 @@ class HomeScreen extends StatelessWidget {
             );
           }
 
-          if (state is CountriesLoaded) {
-            return Container(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView.builder(
-                itemCount: state.countries.length,
-                itemBuilder: (context, index) {
-                  return CountryTile(
-                    state.countries[index],
-                    index: index,
-                    onPressed: () {
-                      context.read<CountriesBloc>().add(
-                        ClickCountry(
-                          countryName:
-                              state.countries[index].name,
-                        ),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder:
-                              (context) =>
-                                  CountryDetailsScreen(),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+          if (state is Error) {
+            return Center(
+              child: Text('Something went wrong'),
             );
           }
-          return Center(
-            child: Text('Something went wrong'),
+          return context.read<CountriesBloc>().allCountries.isNotEmpty
+          ? Container(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView.builder(
+              itemCount: context.read<CountriesBloc>().allCountries.length,
+              itemBuilder: (context, index) {
+                return CountryTile(
+                  context.read<CountriesBloc>().allCountries[index],
+                  index: index,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (context) =>
+                            CountryDetailsScreen(name: context.read<CountriesBloc>().allCountries[index].name,),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          )
+              : Center(
+            child: Text('No countries found'),
           );
+
         },
       ),
     );

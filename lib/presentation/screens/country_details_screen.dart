@@ -1,7 +1,24 @@
 import 'package:african_countries/app_barrel.dart';
 
-class CountryDetailsScreen extends StatelessWidget {
-  const CountryDetailsScreen({super.key});
+class CountryDetailsScreen extends StatefulWidget {
+  const CountryDetailsScreen({super.key, required this.name});
+  final String name;
+
+  @override
+  State<CountryDetailsScreen> createState() => _CountryDetailsScreenState();
+}
+
+class _CountryDetailsScreenState extends State<CountryDetailsScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<CountriesBloc>().add(
+      ClickCountry(
+        countryName: widget.name,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
