@@ -37,13 +37,6 @@ class _CountryDetailsScreenState extends State<CountryDetailsScreen> {
       body: SafeArea(
         child: BlocBuilder<CountriesBloc, CountriesState>(
           builder: (context, state) {
-            if (state is CountriesLoading) {
-              return CircularProgressIndicator(
-                strokeWidth: 2,
-                color: Colors.black,
-              );
-            }
-
             if (state is CountryDetailsLoaded) {
               final details = state.details;
 
@@ -72,7 +65,6 @@ class _CountryDetailsScreenState extends State<CountryDetailsScreen> {
                             CrossAxisAlignment.stretch,
                         children: [
                           Card(
-                            elevation: 2,
                             child: SizedBox(
                               height: 150,
                               child: Padding(
@@ -94,9 +86,11 @@ class _CountryDetailsScreenState extends State<CountryDetailsScreen> {
                                           details.name,
                                         ),
                                         SizedBox(height: 8),
-                                        Subtext(
-                                          details
-                                              .officialName,
+                                        Flexible(flex: 2,
+                                          child: Subtext(
+                                            details
+                                                .officialName,
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -173,8 +167,8 @@ class _CountryDetailsScreenState extends State<CountryDetailsScreen> {
 
             return Center(
               child: CircularProgressIndicator(
-                strokeWidth: 2,
                 color: Colors.black,
+                strokeWidth: 1,
               ),
             );
           },

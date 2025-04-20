@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
 
       // var bloc = CountryBloc(CountryDataSource());
       // bloc.add(LoadCountries());
-      child: MaterialApp(home: HomeScreen()),
+      child: MaterialApp(
+        home: HomeScreen(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
