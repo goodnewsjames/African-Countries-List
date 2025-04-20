@@ -7,6 +7,7 @@ class CountriesBloc
   final CountriesDataSource dataSource;
 
   final detailSource = CountryDetailsDatasource();
+  List<Country> allCountries = [];
 
   CountriesBloc(this.dataSource)
     : super(CountriesInitial()) {
@@ -16,7 +17,8 @@ class CountriesBloc
       try {
         List<Country> countries =
             await dataSource.getAllCountries();
-        countries.sort((a, b) => a.name.compareTo(b.name));
+        allCountries = countries;
+        allCountries.sort((a, b) => a.name.compareTo(b.name));
 
         print("gotten countries");
 
